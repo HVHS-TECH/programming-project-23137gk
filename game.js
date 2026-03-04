@@ -11,7 +11,7 @@ function setup() {
 	console.log("setup: ");
     cnv = new Canvas (1000, 1000);
     circle = new Sprite(500, 400, 100, 200);
-	circle.color = 'purple';
+	circle.color = 'purple';//beep
 }
 
 
