@@ -20,7 +20,28 @@ function setup() {
 // draw()
 /*******************************************************/
 function draw() {
-	background('red');
+	background('mistyrose');
+
+		if (kb.pressing('left')) {
+    // Set sprite's velocity to the left
+			rectangle.vel.x = -5;
+	}
+	else if (kb.pressing ('right')) {
+		// Set sprite's velocity to the right
+			rectangle.vel.x = 5;
+	}
+
+	else if (kb.released('left')) {
+		// Set sprite's velocity to zero
+		rectangle.vel.x = 0;
+
+	}
+
+	else if (kb.released('right')) {
+		// Set sprite's velocity to zero
+		rectangle.vel.x = 0;
+
+	}
 }
 
 /*******************************************************/
