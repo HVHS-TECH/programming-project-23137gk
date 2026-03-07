@@ -12,20 +12,22 @@
 function preload() {
 	imgUni  = loadImage('../assets/images/unicorn.png');
 	imgUnicorn2  = loadImage('../assets/images/unicorn_2.png');
+	imgBG = loadImage('../assets/images/sunset.jpg');
 }
 
 
 function setup() {
 	console.log("setup: ");
     cnv = new Canvas (windowWidth, windowHeight);
-	wallBot = new Sprite(windowWidth, 900, 5000, 100, 'k');
-	wallBot.color = 'darkgreen';
     ball_1 = new Sprite(500, 500, 100, 'd');
 	ball_1.bounciness = 1;
 	ball_1.friction   = 0;
 	ball_1.image = (imgUni);
-	imgUni.resize(50, 50);
+	imgUni.resize(150, 150);
+}
 
+
+	/*
 	ball_2 = new Sprite(100, 300, 50, 'd');
 	ball_2.bounciness = 1;
 	ball_2.friction   = 0;
@@ -35,7 +37,7 @@ function setup() {
 	//rectangle = new Sprite(500, 400, 100, 200);
 	//rectangle.color = 'pink';
 	//rectangle.rotationSpeed = 0;
-}
+
 
 
 
@@ -43,7 +45,7 @@ function setup() {
 // draw()
 /*******************************************************/
 function draw() {
-	background('mistyrose');
+	background(imgBG);
 
 	if (kb.pressing('left')) {
     // Set sprite's velocity to the left
