@@ -12,7 +12,6 @@
 function preload() {
 	imgUni  = loadImage('../assets/images/unicorn.png');
 	imgUnicorn2  = loadImage('../assets/images/unicorn_2.png');
-	imgBG = loadImage('../assets/images/sunset.jpg');
 }
 
 
@@ -26,8 +25,7 @@ function setup() {
 	imgUni.resize(150, 150);
 }
 
-
-	/*
+/*
 	ball_2 = new Sprite(100, 300, 50, 'd');
 	ball_2.bounciness = 1;
 	ball_2.friction   = 0;
@@ -45,7 +43,7 @@ function setup() {
 // draw()
 /*******************************************************/
 function draw() {
-	background(imgBG);
+	background('pink');
 
 	if (kb.pressing('left')) {
     // Set sprite's velocity to the left
