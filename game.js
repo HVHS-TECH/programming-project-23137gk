@@ -26,8 +26,8 @@ function setup() {
 	Uni1Sprite.scale = 0.2;
 
 	//Creating the ground and adding colour
-	ground = new Sprite(windowWidth, 900, 5000, 100, 'static');
-	ground.color = '#ffceec';
+	ground = new Sprite(windowWidth, 900, 5000, 270, 'static');
+	ground.color = '#fcb9ca';
 }
 
 
@@ -45,7 +45,7 @@ function setup() {
 // draw()
 /*******************************************************/
 function draw() {
-	background('#fffff');
+	background('#ffecf2');
 	
 	if (kb.pressing ('right')) {
 		// Set sprite's velocity to the right
