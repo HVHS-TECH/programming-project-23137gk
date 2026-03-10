@@ -16,10 +16,10 @@ function preload() {
 
 function setup() {
 	console.log("setup: ");
-    cnv = new Canvas (windowWidth, windowHeight);
+    cnv = new Canvas (windowWidth - 5, windowHeight- 5);
 
 	// Creating Uni1Sprite and linking the image
-    Uni1Sprite = new Sprite(500, 500, 100, 'd');
+    Uni1Sprite = new Sprite(500, 690, 100, 'd');
 	Uni1Sprite.bounciness = 1;
 	Uni1Sprite.friction   = 0;
 	Uni1Sprite.img = UniFacingLeftImg;

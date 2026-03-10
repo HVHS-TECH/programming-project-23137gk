@@ -1,8 +1,20 @@
+body{
+  background-color: white;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 90vh;
+  margin:0;
+}
+
+
+
+
+
 header {
     text-align: center;
-    background-color: mistyrose;
-    font-family:cursive;
-    color:lightslategrey;
+    font-family:Arial, sans-serif;
+    color:black;
 }
 
 
@@ -13,7 +25,7 @@ button {
   border: none;
   border-radius: 5px;
   background-color:lightpink;
-  color: #798896;
+  color: black;
   transition: background-color 0.3s;
   width: 220px; /* Set a fixed width */
   text-align: center;
