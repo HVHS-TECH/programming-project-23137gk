@@ -3,34 +3,59 @@
 /// Written by gauri
 //// 2/03/26
 /*******************************************************/
-	
+
 
 
 /*******************************************************/
 // setup()
 /*******************************************************/
+
+// preloading the images
 function preload() {
-	UniFacingLeftImg  = loadImage('../assets/images/unicorn.png'); // images made by me using chat gpt
-	UniFacingRightImg  = loadImage('../assets/images/unicorn_2.png');
+	uniFacingLeftImg = loadImage('../assets/images/unicorn.png'); // images made by me using chat gpt
+	uniFacingRightImg = loadImage('../assets/images/unicorn_2.png');
+	candyImg = loadImage('../assets/images/candy.png');
 }
 
 function setup() {
 	console.log("setup: ");
-    cnv = new Canvas (windowWidth, windowHeight);
+	cnv = new Canvas(windowWidth - 10, windowHeight - 10);
 
 	// Creating Uni1Sprite and linking the image
-    Uni1Sprite = new Sprite(700, 700, 500, 'd');
-	Uni1Sprite.bounciness = 1;
-	Uni1Sprite.friction   = 0;
-	Uni1Sprite.img = UniFacingLeftImg;
-	Uni1Sprite.scale = 0.2;
+	uni1Sprite = new Sprite(700, 700, 500, 'k');
+	friction = 0;
+	uni1Sprite.img = uniFacingLeftImg;
+	uni1Sprite.scale = 0.2;
 
 	//Creating the ground and adding colour
 	ground = new Sprite(windowWidth, 900, 5000, 270, 'static');
 	ground.color = '#fcb9ca';
+
+	// Creating the candy sprite and linking the image
+	candySprite = new Sprite(100, 100, 200, 'd');
+	world.gravity.y = 10;
+	candySprite.img = candyImg;
+	candySprite.scale = 0.1;
 }
 
 
+function candy() {
+	candyGroup = new Group();
+	for (i = 0; i < 40; i++) {
+		alien = new Sprite(5,5);
+		alien.vel.x = 3;
+		alien.vel.y = 4;
+		alienGroup.add(alien);
+	}
+}
+
+// if any candy in alienGroup collides with uni1Sprite, call func2Call
+	candyGroup.collides(uni1Sprite, func2Call);
+
+function func2Call(_ssss, candySprite) {
+	// Delete the candy which was hit
+	_ssss.remove();
+}
 
 
 
@@ -40,29 +65,28 @@ function setup() {
 function draw() {
 	background('#ffecf2');
 	
-	if (kb.pressing ('right')) {
+	if (kb.pressing('right')) {
 		// Set sprite's velocity to the right
-		console.log("wheeeee")
-			Uni1Sprite.vel.x = +20;
-			Uni1Sprite.img = UniFacingRightImg
+		uni1Sprite.vel.x = +20;
+		uni1Sprite.img = uniFacingRightImg
 	}
 
 	else if (kb.pressing('left')) {
-    // Set sprite's velocity to the left
-			Uni1Sprite.vel.x = -20;
-			Uni1Sprite.img = UniFacingLeftImg
+		// Set sprite's velocity to the left
+		uni1Sprite.vel.x = -20;
+		uni1Sprite.img = uniFacingLeftImg
 	}
 
 
 	else if (kb.released('left')) {
 		// Set sprite's velocity to zero
-		Uni1Sprite.vel.x = 0;
+		uni1Sprite.vel.x = 0;
 
 	}
 
 	else if (kb.released('right')) {
 		// Set sprite's velocity to zero
-		Uni1Sprite.vel.x = 0;
+		uni1Sprite.vel.x = 0;
 
 	}
 }
