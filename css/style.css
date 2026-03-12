@@ -23,7 +23,7 @@ button {
   cursor: pointer;
   border: none;
   border-radius: 5px;
-  background-color:lightpink;
+  background-color:rgb(255, 199, 208);
   color: black;
   transition: background-color 0.3s;
   width: 220px; /* Set a fixed width */

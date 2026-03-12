@@ -12,9 +12,11 @@
 
 // preloading the images
 function preload() {
-	uniFacingLeftImg = loadImage('../assets/images/unicorn.png'); // images made by me using chat gpt
+	uniFacingLeftImg = loadImage('../assets/images/unicorn.png'); // all images made by me using chat gpt
 	uniFacingRightImg = loadImage('../assets/images/unicorn_2.png');
 	candyImg = loadImage('../assets/images/candy.png');
+	pickleImg = loadImage('../assets/images/pickle.png');
+
 }
 
 function setup() {
@@ -37,6 +39,12 @@ function setup() {
 	candySprite.img = candyImg;
 	candySprite.scale = 0.1;
 	candy();
+
+	pickleSprite = new Sprite(300, 100, 300,);
+	world.gravity.y = 10;
+	pickleSprite.img = pickleImg;
+	pickleSprite.scale = 0.1;
+	avoidPickle();
 }
 
 
@@ -51,6 +59,7 @@ function candy() {
 	lollyGroup.collides(uni1Sprite, func2Call);
 
 
+	// uni1sprite catches the candy
 	function func2Call(_ssss, _uni1Sprite) {
 		// Delete the candy which was hit
 		_ssss.remove();
@@ -60,11 +69,48 @@ function candy() {
 	lollyGroup.collides(ground, func2Call);
 
 
+	// candy hits the ground
 	function func2Call(_ssss, _ground) {
 		// Delete the candy as it hits the ground
 		_ssss.remove();
 	}
 }
+
+
+
+
+
+
+
+function avoidPickle() {
+	pickleGroup = new Group();
+		world.gravity.y = 10;
+		pickleGroup.friction = 0;
+		pickleGroup.add(pickleSprite);
+
+
+	// if the pickle in pickleGroup collides with uni1Sprite, call func2Call
+	pickleGroup.collides(uni1Sprite, func2Call);
+
+
+	// uni1sprite catches the pickly
+	function func2Call(_ssss, _uni1Sprite) {
+		// Delete the pickle which was hit
+		_ssss.remove();
+	}
+	
+	// if a pickle in pickleGroup collides with ground, call func2Call
+	pickleGroup.collides(ground, func2Call);
+
+
+	// pickle hits the ground
+	function func2Call(_ssss, _ground) {
+		// Delete the pickle as it hits the ground
+		_ssss.remove();
+	}
+}
+
+
 
 
 
@@ -97,6 +143,13 @@ function draw() {
 		// Set sprite's velocity to zero
 		uni1Sprite.vel.x = 0;
 
+	}
+
+	if (uni1Sprite.colliding(pickleSprite)) {
+		noLoop()
+		textSize (60);
+		fill ('red');
+		text('game over', width/2-150, height/2);
 	}
 }
 
