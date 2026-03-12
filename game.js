@@ -32,29 +32,38 @@ function setup() {
 	ground.color = '#fcb9ca';
 
 	// Creating the candy sprite and linking the image
-	candySprite = new Sprite(100, 100, 200, 'd');
+	candySprite = new Sprite(100, 100, 200,);
 	world.gravity.y = 10;
 	candySprite.img = candyImg;
 	candySprite.scale = 0.1;
+	candy();
 }
 
 
 function candy() {
-	candyGroup = new Group();
-	for (i = 0; i < 40; i++) {
-		alien = new Sprite(5,5);
-		alien.vel.x = 3;
-		alien.vel.y = 4;
-		alienGroup.add(alien);
+	lollyGroup = new Group();
+		world.gravity.y = 10;
+		candySprite.friction = 0;
+		lollyGroup.add(candySprite);
+
+
+	// if any candy in lollyGroup collides with uni1Sprite, call func2Call
+	lollyGroup.collides(uni1Sprite, func2Call);
+
+
+	function func2Call(_ssss, _uni1Sprite) {
+		// Delete the candy which was hit
+		_ssss.remove();
 	}
-}
+	
+	// if any candy in lollyGroup collides with ground, call func2Call
+	lollyGroup.collides(ground, func2Call);
 
-// if any candy in alienGroup collides with uni1Sprite, call func2Call
-	candyGroup.collides(uni1Sprite, func2Call);
 
-function func2Call(_ssss, candySprite) {
-	// Delete the candy which was hit
-	_ssss.remove();
+	function func2Call(_ssss, _ground) {
+		// Delete the candy as it hits the ground
+		_ssss.remove();
+	}
 }
 
 
