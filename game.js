@@ -4,13 +4,14 @@
 //// 2/03/26
 /*******************************************************/
 
-
+// score and lives 
+let score = 0;
+let lives = 3;
 
 /*******************************************************/
-// setup()
+// preload()
 /*******************************************************/
 
-// preloading the images
 function preload() {
 	uniFacingLeftImg = loadImage('../assets/images/unicorn.png'); // all images made by me using chat gpt
 	uniFacingRightImg = loadImage('../assets/images/unicorn_2.png');
@@ -19,98 +20,96 @@ function preload() {
 
 }
 
+/*******************************************************/
+// setup()
+/*******************************************************/
+
 function setup() {
 	console.log("setup: ");
 	cnv = new Canvas(windowWidth - 10, windowHeight - 10);
 
-	// Creating Uni1Sprite and linking the image
+	// Uni1Sprite 
 	uni1Sprite = new Sprite(700, 700, 500, 'k');
-	friction = 0;
+	uni1Sprite.friction = 0;
 	uni1Sprite.img = uniFacingLeftImg;
 	uni1Sprite.scale = 0.2;
 
-	//Creating the ground and adding colour
+	// ground 
 	ground = new Sprite(windowWidth, 900, 5000, 270, 'static');
 	ground.color = '#fcb9ca';
 
-	// Creating the candy sprite and linking the image
+	// groups
+	lollyGroup = new Group();
+	pickleGroup = new Group();
+
+	// candy collisons
+	lollyGroup.collides(uni1Sprite, collectCandy);
+	lollyGroup.collides(ground, removeCandy);
+
+	// pickle collisons
+	pickleGroup.collides(uni1Sprite, hitPickle);
+	pickleGroup.collides(ground, removePickle);
+
+	// candySprite
 	candySprite = new Sprite(100, 100, 200,);
 	world.gravity.y = 10;
 	candySprite.img = candyImg;
 	candySprite.scale = 0.1;
-	candy();
 
+	// creating the pickle sprite 
 	pickleSprite = new Sprite(300, 100, 300,);
 	world.gravity.y = 10;
 	pickleSprite.img = pickleImg;
 	pickleSprite.scale = 0.1;
-	avoidPickle();
 }
 
 
-function candy() {
-	lollyGroup = new Group();
-		world.gravity.y = 10;
-		candySprite.friction = 0;
-		lollyGroup.add(candySprite);
-
-
-	// if any candy in lollyGroup collides with uni1Sprite, call func2Call
-	lollyGroup.collides(uni1Sprite, func2Call);
-
-
-	// uni1sprite catches the candy
-	function func2Call(_ssss, _uni1Sprite) {
-		// Delete the candy which was hit
-		_ssss.remove();
-	}
-	
-	// if any candy in lollyGroup collides with ground, call func2Call
-	lollyGroup.collides(ground, func2Call);
-
-
-	// candy hits the ground
-	function func2Call(_ssss, _ground) {
-		// Delete the candy as it hits the ground
-		_ssss.remove();
-	}
+/*******************************************************/
+// collision functions
+/*******************************************************/
+function collectCandy(candySprite, uni1Sprite) {
+	candySprite.remove();
+	score = score + 1;
 }
 
-
-
-
-
-
-
-function avoidPickle() {
-	pickleGroup = new Group();
-		world.gravity.y = 10;
-		pickleGroup.friction = 0;
-		pickleGroup.add(pickleSprite);
-
-
-	// if the pickle in pickleGroup collides with uni1Sprite, call func2Call
-	pickleGroup.collides(uni1Sprite, func2Call);
-
-
-	// uni1sprite catches the pickly
-	function func2Call(_ssss, _uni1Sprite) {
-		// Delete the pickle which was hit
-		_ssss.remove();
-	}
-	
-	// if a pickle in pickleGroup collides with ground, call func2Call
-	pickleGroup.collides(ground, func2Call);
-
-
-	// pickle hits the ground
-	function func2Call(_ssss, _ground) {
-		// Delete the pickle as it hits the ground
-		_ssss.remove();
-	}
+function removeCandy(candySprite, ground) {
+	candySprite.remove();
 }
 
+function hitPickle(pickleSprite, uni1Sprite) {
+	pickleSprite.remove();
+	lives = lives - 1;
+}
 
+function removePickle(pickleSprite, ground) {
+	pickleSprite.remove();
+}
+
+/*******************************************************/
+// spawning candy and pickles
+/*******************************************************/
+
+function spawnCandy() {
+
+	let candySprite = new Sprite(random(50, width-50), -50, 200);
+
+	candySprite.img = candyImg;
+	candySprite.scale = 0.1;
+	candySprite.friction = 0;
+
+	lollyGroup.add(candySprite);
+}
+
+function spawnPickle() {
+
+	let pickleSprite = new Sprite(random(50, width-50), -50, 200);
+
+	pickleSprite.img = pickleImg;
+	pickleSprite.scale = 0.1;
+	pickleSprite.friction = 0;
+
+	pickleGroup.add(pickleSprite);
+}
 
 
 
@@ -120,6 +119,17 @@ function avoidPickle() {
 function draw() {
 	background('#ffecf2');
 	
+	// spawning every 60-120 frames
+	if(frameCount % 60 === 0) {
+		spawnCandy();
+	}
+
+	if(frameCount % 120 === 0) {
+		spawnPickle();
+	}
+
+
+
 	if (kb.pressing('right')) {
 		// Set sprite's velocity to the right
 		uni1Sprite.vel.x = +20;
@@ -145,11 +155,18 @@ function draw() {
 
 	}
 
-	if (uni1Sprite.colliding(pickleSprite)) {
+	// score + lives displaying
+	textSize(30);
+	fill('black');
+	text('score:' + score, 50, 100);
+	text('lives:' + lives, 1300, 100);
+
+
+	if (lives <= 0) {
 		noLoop()
-		textSize (60);
+		textSize (70);
 		fill ('red');
-		text('game over', width/2-150, height/2);
+		text('game over', 500, 500);
 	}
 }
 
