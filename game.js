@@ -26,7 +26,7 @@ function preload() {
 
 function setup() {
 	console.log("setup: ");
-	cnv = new Canvas(windowWidth - 10, windowHeight - 10);
+	cnv = new Canvas(windowWidth, windowHeight);
 
 	// Uni1Sprite 
 	uni1Sprite = new Sprite(700, 700, 500, 'k');
@@ -49,6 +49,7 @@ function setup() {
 	// pickle collisons
 	pickleGroup.collides(uni1Sprite, hitPickle);
 	pickleGroup.collides(ground, removePickle);
+
 }
 
 
@@ -80,6 +81,7 @@ function removePickle(pickleSprite, ground) {
 function spawnCandy() {
 	let candySprite = new Sprite(random(50, width-50), -50, 200);
 	candySprite.img = candyImg;
+	world.gravity.y = 10;
 	candySprite.scale = 0.1;
 	candySprite.friction = 0;
 	lollyGroup.add(candySprite);
@@ -88,6 +90,7 @@ function spawnCandy() {
 function spawnPickle() {
 	let pickleSprite = new Sprite(random(50, width-50), -50, 200);
 	pickleSprite.img = pickleImg;
+	world.gravity.y = 10;
 	pickleSprite.scale = 0.1;
 	pickleSprite.friction = 0;
 	pickleGroup.add(pickleSprite);
@@ -102,11 +105,11 @@ function draw() {
 	background('#ffecf2');
 	
 	// spawning after a certain amount of frames
-	if(frameCount % 60 === 0) {
+	if(frameCount % 70 === 0) {
 		spawnCandy();
 	}
 
-	if(frameCount % 110 === 0) {
+	if(frameCount % 115 === 0) {
 		spawnPickle();
 	}
 
@@ -114,13 +117,13 @@ function draw() {
 
 	if (kb.pressing('right')) {
 		// Set sprite's velocity to the right
-		uni1Sprite.vel.x = +20;
+		uni1Sprite.vel.x = +15;
 		uni1Sprite.img = uniFacingRightImg
 	}
 
 	else if (kb.pressing('left')) {
 		// Set sprite's velocity to the left
-		uni1Sprite.vel.x = -20;
+		uni1Sprite.vel.x = -15;
 		uni1Sprite.img = uniFacingLeftImg
 	}
 
@@ -150,7 +153,7 @@ function draw() {
 		noLoop()
 		textSize (70);
 		fill ('#ff8f8f');
-		text('GAME OVER', 700, 500);
+		text('GAME OVER', width/2, height/2);
 	}
 }
 
