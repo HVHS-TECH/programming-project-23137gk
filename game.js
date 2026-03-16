@@ -49,18 +49,6 @@ function setup() {
 	// pickle collisons
 	pickleGroup.collides(uni1Sprite, hitPickle);
 	pickleGroup.collides(ground, removePickle);
-
-	// candySprite
-	candySprite = new Sprite(100, 100, 200,);
-	world.gravity.y = 10;
-	candySprite.img = candyImg;
-	candySprite.scale = 0.1;
-
-	// creating the pickle sprite 
-	pickleSprite = new Sprite(300, 100, 300,);
-	world.gravity.y = 10;
-	pickleSprite.img = pickleImg;
-	pickleSprite.scale = 0.1;
 }
 
 
@@ -90,24 +78,18 @@ function removePickle(pickleSprite, ground) {
 /*******************************************************/
 
 function spawnCandy() {
-
 	let candySprite = new Sprite(random(50, width-50), -50, 200);
-
 	candySprite.img = candyImg;
 	candySprite.scale = 0.1;
 	candySprite.friction = 0;
-
 	lollyGroup.add(candySprite);
 }
 
 function spawnPickle() {
-
 	let pickleSprite = new Sprite(random(50, width-50), -50, 200);
-
 	pickleSprite.img = pickleImg;
 	pickleSprite.scale = 0.1;
 	pickleSprite.friction = 0;
-
 	pickleGroup.add(pickleSprite);
 }
 
@@ -119,12 +101,12 @@ function spawnPickle() {
 function draw() {
 	background('#ffecf2');
 	
-	// spawning every 60-120 frames
+	// spawning after a certain amount of frames
 	if(frameCount % 60 === 0) {
 		spawnCandy();
 	}
 
-	if(frameCount % 120 === 0) {
+	if(frameCount % 110 === 0) {
 		spawnPickle();
 	}
 
@@ -155,18 +137,20 @@ function draw() {
 
 	}
 
+
+
 	// score + lives displaying
 	textSize(30);
-	fill('black');
-	text('score:' + score, 50, 100);
-	text('lives:' + lives, 1300, 100);
+	fill('#ff68a7');
+	text('score: ' + score, 50, 100);
+	text('lives: ' + lives, width-130, 100);
 
 
 	if (lives <= 0) {
 		noLoop()
 		textSize (70);
-		fill ('red');
-		text('game over', 500, 500);
+		fill ('#ff8f8f');
+		text('GAME OVER', 700, 500);
 	}
 }
 
