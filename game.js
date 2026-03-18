@@ -7,6 +7,7 @@
 // score and lives 
 let score = 0;
 let lives = 3;
+let gameState = 'menu';
 
 /*******************************************************/
 // preload()
@@ -138,7 +139,8 @@ function draw() {
 		// Set sprite's velocity to zero
 		uni1Sprite.vel.x = 0;
 
-	}
+	} 
+
 
 
 
