@@ -7,17 +7,16 @@
 // score and lives 
 let score = 0;
 let lives = 3;
-let gameState = 'menu';
 
 /*******************************************************/
 // preload()
 /*******************************************************/
 
 function preload() {
-	uniFacingLeftImg = loadImage('../assets/images/unicorn.png'); // all images made by me using chat gpt
-	uniFacingRightImg = loadImage('../assets/images/unicorn_2.png');
-	candyImg = loadImage('../assets/images/candy.png');
-	pickleImg = loadImage('../assets/images/pickle.png');
+	uniFacingLeftImg = loadImage('assets/images/unicorn.png'); // all images made by me using chat gpt
+	uniFacingRightImg = loadImage('assets/images/unicorn_2.png');
+	candyImg = loadImage('assets/images/candy.png');
+	pickleImg = loadImage('assets/images/pickle.png');
 
 }
 
