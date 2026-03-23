@@ -7,7 +7,7 @@
 // score and lives 
 let score = 0;
 let lives = 3;
-let gameState = 'menu';
+let gameState = 'play';
 
 /*******************************************************/
 // preload()
@@ -57,6 +57,7 @@ function setup() {
 /*******************************************************/
 // collision functions
 /*******************************************************/
+
 function collectCandy(candySprite, uni1Sprite) {
 	candySprite.remove();
 	score = score + 1;
@@ -78,6 +79,7 @@ function removePickle(pickleSprite, ground) {
 /*******************************************************/
 // spawning candy and pickles
 /*******************************************************/
+
 
 function spawnCandy() {
 	let candySprite = new Sprite(random(50, width-50), -50, 200);
@@ -102,60 +104,62 @@ function spawnPickle() {
 /*******************************************************/
 // draw()
 /*******************************************************/
+
 function draw() {
-	background('#ffecf2');
-	
-	// spawning after a certain amount of frames
-	if(frameCount % 70 === 0) {
-		spawnCandy();
-	}
+background('#ffecf2');
+	if (gameState === "play") {
+		// spawning
+		if(frameCount % 70 === 0) spawnCandy();
+		if(frameCount % 115 === 0) spawnPickle();
 
-	if(frameCount % 115 === 0) {
-		spawnPickle();
-	}
+		// movement
+		if (kb.pressing('right')) {
+			uni1Sprite.vel.x = 15;
+			uni1Sprite.img = uniFacingRightImg;
+		}
+		else if (kb.pressing('left')) {
+			uni1Sprite.vel.x = -15;
+			uni1Sprite.img = uniFacingLeftImg;
+		}
+		else {
+			uni1Sprite.vel.x = 0;
+		}
 
+		// UI
+		textSize(30);
+		fill('#ff68a7');
+		text('score: ' + score, 50, 100);
+		text('lives: ' + lives, width-150, 100);
 
+		// game over trigger
+		if (lives <= 0) {
+			gameState = "gameOver";
+			uni1Sprite.vel.x = 0;
+		}
 
-	if (kb.pressing('right')) {
-		// Set sprite's velocity to the right
-		uni1Sprite.vel.x = +15;
-		uni1Sprite.img = uniFacingRightImg
-	}
-
-	else if (kb.pressing('left')) {
-		// Set sprite's velocity to the left
-		uni1Sprite.vel.x = -15;
-		uni1Sprite.img = uniFacingLeftImg
-	}
-
-
-	else if (kb.released('left')) {
-		// Set sprite's velocity to zero
-		uni1Sprite.vel.x = 0;
-
-	}
-
-	else if (kb.released('right')) {
-		// Set sprite's velocity to zero
-		uni1Sprite.vel.x = 0;
-
-	} 
-
-
-
-
-	// score + lives displaying
-	textSize(30);
-	fill('#ff68a7');
-	text('score: ' + score, 50, 100);
-	text('lives: ' + lives, width-130, 100);
-
-
-	if (lives <= 0) {
-		noLoop()
-		textSize (70);
-		fill ('#ff8f8f');
+	} else if (gameState === "gameOver") {
+	 	textAlign(CENTER);
+		textSize(70);
+		fill('#ff8f8f');
 		text('GAME OVER', width/2, height/2);
+
+		textSize(30);
+		text('Press SPACE to restart', width/2, height/2 + 50);
+
+		// restart
+		if (kb.presses('space')) {
+			score = 0;
+			lives = 3;
+
+			lollyGroup.removeAll();
+			pickleGroup.removeAll();
+
+			uni1Sprite.x = width/2;
+			uni1Sprite.y = 700;
+			uni1Sprite.vel.x = 0;
+
+			gameState = "play";
+		}
 	}
 }
 
