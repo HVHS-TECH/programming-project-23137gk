@@ -125,13 +125,13 @@ background('#ffecf2');
 			uni1Sprite.vel.x = 0;
 		}
 
-		// UI
+		
 		textSize(30);
 		fill('#ff68a7');
 		text('score: ' + score, 50, 100);
 		text('lives: ' + lives, width-150, 100);
 
-		// game over trigger
+		// game over 
 		if (lives <= 0) {
 			gameState = "gameOver";
 			uni1Sprite.vel.x = 0;
@@ -146,7 +146,7 @@ background('#ffecf2');
 		textSize(30);
 		text('Press SPACE to restart', width/2, height/2 + 50);
 
-		// restart
+		// restart game
 		if (kb.presses('space')) {
 			score = 0;
 			lives = 3;
