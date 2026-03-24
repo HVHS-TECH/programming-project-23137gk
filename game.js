@@ -133,8 +133,8 @@ function draw() {
        textSize(30);
        fill('#ff68a7');
        for (let i = 0; i < 1; i++) {
-           text('score: ' + score, 50, 100);
-           text('lives: ' + lives, width-150, 100);
+           text('Score: ' + score, 50, 100);
+           text('Lives: ' + lives, width-150, 100);
        }
 
 
