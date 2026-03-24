@@ -108,17 +108,18 @@ function spawnPickle() {
 function draw() {
 background('#ffecf2');
 	if (gameState === "play") {
+
 		// spawning
 		if(frameCount % 70 === 0) spawnCandy();
 		if(frameCount % 115 === 0) spawnPickle();
 
 		// movement
 		if (kb.pressing('right')) {
-			uni1Sprite.vel.x = 15;
+			uni1Sprite.vel.x = 16;
 			uni1Sprite.img = uniFacingRightImg;
 		}
 		else if (kb.pressing('left')) {
-			uni1Sprite.vel.x = -15;
+			uni1Sprite.vel.x = -16;
 			uni1Sprite.img = uniFacingLeftImg;
 		}
 		else {
@@ -128,13 +129,18 @@ background('#ffecf2');
 		
 		textSize(30);
 		fill('#ff68a7');
-		text('score: ' + score, 50, 100);
-		text('lives: ' + lives, width-150, 100);
+		for (let i = 0; i < 1; i++) {
+			text('score: ' + score, 50, 100);
+			text('lives: ' + lives, width-150, 100);
+		}
 
 		// game over 
 		if (lives <= 0) {
 			gameState = "gameOver";
 			uni1Sprite.vel.x = 0;
+
+			lollyGroup.removeAll();
+			pickleGroup.removeAll();
 		}
 
 	} else if (gameState === "gameOver") {
