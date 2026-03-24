@@ -7,6 +7,7 @@
 // score and lives 
 let score = 0;
 let lives = 3;
+let gameState = 'play';
 
 /*******************************************************/
 // preload()
@@ -103,60 +104,71 @@ function spawnPickle() {
 /*******************************************************/
 function draw() {
 	background('#ffecf2');
-	
-	// spawning after a certain amount of frames
-	if(frameCount % 70 === 0) {
-		spawnCandy();
-	}
+   if (gameState === "play") {
 
-	if(frameCount % 115 === 0) {
-		spawnPickle();
-	}
+       // spawning
+       if(frameCount % 70 === 0) spawnCandy();
+       if(frameCount % 115 === 0) spawnPickle();
 
 
-
-	if (kb.pressing('right')) {
-		// Set sprite's velocity to the right
-		uni1Sprite.vel.x = +15;
-		uni1Sprite.img = uniFacingRightImg
-	}
-
-	else if (kb.pressing('left')) {
-		// Set sprite's velocity to the left
-		uni1Sprite.vel.x = -15;
-		uni1Sprite.img = uniFacingLeftImg
-	}
-
-
-	else if (kb.released('left')) {
-		// Set sprite's velocity to zero
-		uni1Sprite.vel.x = 0;
-
-	}
-
-	else if (kb.released('right')) {
-		// Set sprite's velocity to zero
-		uni1Sprite.vel.x = 0;
-
-	} 
+       // movement
+       if (kb.pressing('right')) {
+           uni1Sprite.vel.x = 15;
+           uni1Sprite.img = uniFacingRightImg;
+       }
+       else if (kb.pressing('left')) {
+           uni1Sprite.vel.x = -15;
+           uni1Sprite.img = uniFacingLeftImg;
+       }
+       else {
+           uni1Sprite.vel.x = 0;
+       }
 
 
+       textSize(30);
+       fill('#ff68a7');
+       text('score: ' + score, 60, 100);
+       text('lives: ' + lives, width-150, 100);
 
 
-	// score + lives displaying
-	textSize(30);
-	fill('#ff68a7');
-	text('score: ' + score, 50, 100);
-	text('lives: ' + lives, width-130, 100);
+       // game over 
+       if (lives <= 0) {
+           gameState = "gameOver";
+           uni1Sprite.vel.x = 0;
+       }
 
 
-	if (lives <= 0) {
-		noLoop()
-		textSize (70);
-		fill ('#ff8f8f');
-		text('GAME OVER', width/2, height/2);
-	}
+   } else if (gameState === "gameOver") {
+       textAlign(CENTER);
+       textSize(70);
+       fill('#ff8f8f');
+       text('GAME OVER', width/2, height/2);
+
+
+       textSize(30);
+       text('Press SPACE to restart', width/2, height/2 + 50);
+
+
+       // restart game
+       if (kb.presses('space')) {
+           score = 0;
+           lives = 3;
+
+
+           lollyGroup.removeAll();
+           pickleGroup.removeAll();
+
+
+           uni1Sprite.x = width/2;
+           uni1Sprite.y = 700;
+           uni1Sprite.vel.x = 0;
+
+
+           gameState = "play";
+       }
+   }
 }
+
 
 /*******************************************************/
 //  END OF GAME
