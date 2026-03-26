@@ -31,16 +31,19 @@ function setup() {
 
     // walls
     wall_left = new Sprite(5, 300, 15, 950, 'k');
-	wall_right = new Sprite(700, 700, 500, 10, 'k');
+    wall_left.color = 'pink';
+	wall_right = new Sprite(1915, 5, 15, 1520, 'k');
+    wall_right.color = 'pink';
 
 	// Uni1Sprite 
 	uni1Sprite = new Sprite(700, 700, 500, 'k');
 	uni1Sprite.friction = 0;
 	uni1Sprite.img = uniFacingLeftImg;
 	uni1Sprite.scale = 0.2;
+    uni1Sprite.debug = true;
 
 	// ground 
-	ground = new Sprite(windowWidth, 900, 5000, 270, 'static');
+	ground = new Sprite(windowWidth, 900, 5000, 270, 'k');
 	ground.color = '#fcb9ca';
 
 	// groups
@@ -138,7 +141,8 @@ function draw() {
        textSize(30);
        fill('#ff68a7');
        text('Score: ' + score, 50, 100);
-       text('Lives: ' + lives, width-150, 100);
+       text('Lives: ' + lives, width-150, 100); 
+
 
        // game over
        if (lives <= 0) {
@@ -147,21 +151,24 @@ function draw() {
            lollyGroup.removeAll();
            pickleGroup.removeAll();
        }
+
+
+
        // if gamestate equals game over, game ends, press space to restart
-       else if (gameState === "gameOver") {
+    } else if (gameState === "gameOver") {
             textAlign(CENTER);
             textSize(70);
             fill('#ff8f8f');
             text('GAME OVER', width/2, height/2);
             textSize(30);
             text('Press SPACE to restart', width/2, height/2 + 50);
-       }
-
 
        // restart game
        if (kb.presses('space')) {
            score = 0;
            lives = 3;
+           text('Score: ' + score, 50, 100);
+           text('Lives: ' + lives, width-150, 100); 
            lollyGroup.removeAll();
            pickleGroup.removeAll();
            uni1Sprite.x = width/2;
@@ -171,7 +178,6 @@ function draw() {
        }
    }
 }
-
 
 /*******************************************************/
 //  END OF GAME
