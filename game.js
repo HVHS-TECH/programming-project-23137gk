@@ -40,7 +40,10 @@ function setup() {
 	uni1Sprite.friction = 0;
 	uni1Sprite.img = uniFacingLeftImg;
 	uni1Sprite.scale = 0.2;
-    uni1Sprite.debug = true;
+    uni1Sprite.width = 200;
+    uni1Sprite.height = 130;
+    uni1Sprite.collider = 'dynamic';
+    //uni1Sprite.debug = true;
 
 	// ground 
 	ground = new Sprite(windowWidth, 900, 5000, 270, 'k');
