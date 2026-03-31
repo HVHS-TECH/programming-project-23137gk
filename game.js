@@ -141,6 +141,7 @@ function draw() {
        }
 
        // lives and score display
+       textAlign(LEFT);
        textSize(30);
        fill('#ff68a7');
        text('Score: ' + score, 50, 100);
@@ -161,7 +162,7 @@ function draw() {
     } else if (gameState === "gameOver") {
             textAlign(CENTER);
             textSize(70);
-            fill('#ff8f8f');
+            fill('#ff5583');
             text('GAME OVER', width/2, height/2);
             textSize(30);
             text('Press SPACE to restart', width/2, height/2 + 50);
@@ -170,8 +171,6 @@ function draw() {
        if (kb.presses('space')) {
            score = 0;
            lives = 3;
-           text('Score: ' + score, 50, 100);
-           text('Lives: ' + lives, width-150, 100); 
            lollyGroup.removeAll();
            pickleGroup.removeAll();
            uni1Sprite.x = width/2;
