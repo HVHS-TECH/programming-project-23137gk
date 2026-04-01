@@ -32,7 +32,7 @@ function setup() {
     // walls
     wall_left = new Sprite(5, 300, 15, 950, 'k');
     wall_left.color = 'pink';
-	wall_right = new Sprite(1465, 5, 15, 1520, 'k');
+	wall_right = new Sprite(1915, 5, 15, 1520, 'k');
     wall_right.color = 'pink';
 
 	// Uni1Sprite 
@@ -141,7 +141,6 @@ function draw() {
        }
 
        // lives and score display
-       textAlign(LEFT);
        textSize(30);
        fill('#ff68a7');
        text('Score: ' + score, 80, 100);
@@ -164,7 +163,7 @@ function draw() {
             text('Score: ' + score, 80, 100);
             text('Lives: ' + lives, width-150, 100); 
             textSize(70);
-            fill('#ff5583');
+            fill('#ff8f8f');
             text('GAME OVER', width/2, height/2);
             textSize(30);
             text('Press SPACE to restart', width/2, height/2 + 50);
@@ -173,11 +172,8 @@ function draw() {
        if (kb.presses('space')) {
            score = 0;
            lives = 3;
-<<<<<<< HEAD
            text('Score: ' + score, 80, 100);
            text('Lives: ' + lives, width-150, 100); 
-=======
->>>>>>> e450870ff004a9534b46abd109fa2e44045be34f
            lollyGroup.removeAll();
            pickleGroup.removeAll();
            uni1Sprite.x = width/2;
