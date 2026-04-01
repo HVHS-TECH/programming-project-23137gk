@@ -143,7 +143,7 @@ function draw() {
        // lives and score display
        textSize(30);
        fill('#ff68a7');
-       text('Score: ' + score, 50, 100);
+       text('Score: ' + score, 80, 100);
        text('Lives: ' + lives, width-150, 100); 
 
 
@@ -160,6 +160,8 @@ function draw() {
        // if gamestate equals game over, game ends, press space to restart
     } else if (gameState === "gameOver") {
             textAlign(CENTER);
+            text('Score: ' + score, 80, 100);
+            text('Lives: ' + lives, width-150, 100); 
             textSize(70);
             fill('#ff8f8f');
             text('GAME OVER', width/2, height/2);
@@ -170,7 +172,7 @@ function draw() {
        if (kb.presses('space')) {
            score = 0;
            lives = 3;
-           text('Score: ' + score, 50, 100);
+           text('Score: ' + score, 80, 100);
            text('Lives: ' + lives, width-150, 100); 
            lollyGroup.removeAll();
            pickleGroup.removeAll();
