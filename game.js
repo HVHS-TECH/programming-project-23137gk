@@ -32,7 +32,7 @@ function setup() {
     // walls
     wall_left = new Sprite(5, 300, 15, 950, 'k');
     wall_left.color = 'pink';
-	wall_right = new Sprite(1465, 5, 15, 1520, 'k');
+	wall_right = new Sprite(1915, 5, 15, 1520, 'k');
     wall_right.color = 'pink';
 
 	// Uni1Sprite 
