@@ -96,21 +96,25 @@ function removePickle(pickleSprite, ground) {
 
 
 function spawnCandy() {
-	let candySprite = new Sprite(random(50, width-50), -50, 200);
-	candySprite.img = candyImg;
-	world.gravity.y = 10;
-	candySprite.scale = 0.1;
-	candySprite.friction = 0;
-	lollyGroup.add(candySprite);
+    for (i = 0; i < 40; i++) {
+	    let candySprite = new Sprite(random(50, width-50), -50, 200);
+	    candySprite.img = candyImg;
+	    world.gravity.y = 10;
+	    candySprite.scale = 0.1;
+	    candySprite.friction = 0;
+	    lollyGroup.add(candySprite);
+    }
 }
 
 function spawnPickle() {
-	let pickleSprite = new Sprite(random(50, width-50), -50, 200);
-	pickleSprite.img = pickleImg;
-	world.gravity.y = 10;
-	pickleSprite.scale = 0.1;
-	pickleSprite.friction = 0;
-	pickleGroup.add(pickleSprite);
+    for (i = 0; i < 40; i++) {
+	    let pickleSprite = new Sprite(random(50, width-50), -50, 200);
+	    pickleSprite.img = pickleImg;
+	    world.gravity.y = 10;
+	    pickleSprite.scale = 0.1;
+	    pickleSprite.friction = 0;
+	    pickleGroup.add(pickleSprite);
+    }
 }
 
 
